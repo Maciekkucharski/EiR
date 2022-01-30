@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>Emotion Recognition Image </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/w3.css') }}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+<p><h1 align="center">Emotion Recognition Image</h1></p>
+<div class="container">
+<div class="row">
+    <h2>Select a file to upload</h2>
+    <p>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </p>
+
+    {% if filename %}
+        <div >
+            <img src="{{ url_for('display_image', filename=filename) }} " style="width:500px;height:auto;" >
+        <div class="w3-container" style="float:left"  >
+            <p>Angry:</p>
+             <div class="w3-progress-container">
+                    <div id="myBar" class="w3-progress-container w3-round w3-red" style="width:{{ anger  }}%">
+                        <div class="w3-center w3-text-black">{{ anger }}%</div>
+                    </div><br>
+            <p>disgust:</p>
+             <div class="w3-progress-container">
+                    <div id="myBar" class="w3-progress-container w3-round w3-orange" style="width:{{ disgust }}%">
+                        <div class="w3-center w3-text-black">{{ disgust}}%</div>
+                    </div><br>
+            <p>fear:</p>
+             <div class="w3-progress-container">
+                    <div id="myBar" class="w3-progress-container w3-round w3-yellow" style="width:{{ fear }}%">
+                        <div class="w3-center w3-text-black">{{ fear}}%</div>
+                    </div><br>
+            <p>happiness:</p>
+             <div class="w3-progress-container">
+                    <div id="myBar" class="w3-progress-container w3-round w3-green" style="width:{{ happiness }}%">
+                        <div class="w3-center w3-text-black">{{ happiness}}%</div>
+                    </div><br>
+            <p>neutral:</p>
+             <div class="w3-progress-container">
+                    <div id="myBar" class="w3-progress-container w3-round w3-amber" style="width:{{ neutral }}%">
+                        <div class="w3-center w3-text-black">{{ neutral}}%</div>
+                    </div><br>
+            <p>sadness:</p>
+            <div class="w3-progress-container">
+                    <div id="myBar" class="w3-progress-container w3-round w3-round w3-blue-gray" style="width:{{ sadness }}%">
+                        <div class="w3-center w3-text-black">{{ sadness}}%</div>
+                    </div><br>
+            <p>surprise: </p>
+                <div class="w3-progress-container">
+                    <div id="myBar" class="w3-progress-container w3-round w3-purple" style="width:{{ surprise  }}%">
+                       <div class="w3-center w3-text-black">{{ surprise }}%
+                        </div>
+                    </div><br>
+</div><br>
+
+    </div>
+        </div>
+    {% endif %}
+    <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input type="file" name="file" class="form-control" autocomplete="off" required>
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Submit" class="btn btn-info">
+        </p>
+    </form>
+</div>
+</div>
+</body>
+</html>
